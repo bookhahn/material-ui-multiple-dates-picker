@@ -51,22 +51,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var useStyles = (0, _core.makeStyles)(function (theme) {
   return {
     root: {
-      flex: '1',
-      display: 'flex',
-      maxHeight: '100%',
-      overflow: 'hidden'
+      flex: "1",
+      display: "flex",
+      maxHeight: "100%",
+      overflow: "hidden"
     },
     selectorContainer: {
       // marginTop: theme.spacing(2)
       // boxShadow: 'inset 0 0 10px #000000'
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between"
     },
     calendarContainer: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      flexDirection: 'column',
+      display: "flex",
+      justifyContent: "space-between",
+      flexDirection: "column",
       padding: "0 ".concat(theme.spacing(1), "px")
     }
   };
@@ -87,7 +87,8 @@ var Calendar = function Calendar(_ref) {
       onRemoveAtIndex = _ref.onRemoveAtIndex,
       cancelButtonText = _ref.cancelButtonText,
       submitButtonText = _ref.submitButtonText,
-      selectedDatesTitle = _ref.selectedDatesTitle;
+      selectedDatesTitle = _ref.selectedDatesTitle,
+      hideDateDisplay = _ref.hideDateDisplay;
   var calendar = (0, _react.useRef)(null);
   var classes = useStyles();
 
@@ -138,12 +139,12 @@ var Calendar = function Calendar(_ref) {
     onOk: onOk,
     cancelButtonText: cancelButtonText,
     submitButtonText: submitButtonText
-  })), _react["default"].createElement(_DateDisplay["default"], {
+  })), !hideDateDisplay ? _react["default"].createElement(_DateDisplay["default"], {
     selectedDatesTitle: selectedDatesTitle,
     selectedDates: selectedDates,
     readOnly: readOnly,
     onRemoveAtIndex: onRemoveAtIndex
-  }));
+  }) : null);
 };
 
 var _default = Calendar;

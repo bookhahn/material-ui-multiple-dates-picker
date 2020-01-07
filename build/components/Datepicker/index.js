@@ -48,7 +48,7 @@ var useStyles = (0, _styles.makeStyles)(function (theme) {
     dialogPaper: {
       minHeight: 482,
       maxHeight: 482,
-      display: 'flex'
+      display: "flex"
     }
   };
 });
@@ -63,13 +63,13 @@ function initState(selectedDates) {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'setSelectedDates':
+    case "setSelectedDates":
       return _objectSpread({}, state, {
         selectedDates: action.payload
       });
 
     default:
-      return new Error('wrong action type in multiple date picker reducer');
+      return new Error("wrong action type in multiple date picker reducer");
   }
 }
 
@@ -81,12 +81,14 @@ var DatePicker = function DatePicker(_ref) {
       outerSelectedDates = _ref.selectedDates,
       cancelButtonText = _ref.cancelButtonText,
       _ref$submitButtonText = _ref.submitButtonText,
-      submitButtonText = _ref$submitButtonText === void 0 ? 'Submit' : _ref$submitButtonText,
+      submitButtonText = _ref$submitButtonText === void 0 ? "Submit" : _ref$submitButtonText,
       _ref$selectedDatesTit = _ref.selectedDatesTitle,
-      selectedDatesTitle = _ref$selectedDatesTit === void 0 ? 'Selected Dates' : _ref$selectedDatesTit;
+      selectedDatesTitle = _ref$selectedDatesTit === void 0 ? "Selected Dates" : _ref$selectedDatesTit,
+      _ref$hideDateDisplay = _ref.hideDateDisplay,
+      hideDateDisplay = _ref$hideDateDisplay === void 0 ? true : _ref$hideDateDisplay;
 
   if (cancelButtonText == null) {
-    cancelButtonText = readOnly ? 'Dismiss' : 'Cancel';
+    cancelButtonText = readOnly ? "Dismiss" : "Cancel";
   }
 
   var _useReducer = (0, _react.useReducer)(reducer, outerSelectedDates, initState),
@@ -103,14 +105,14 @@ var DatePicker = function DatePicker(_ref) {
 
     if (_utils["default"].dateIn(selectedDates, day)) {
       dispatch({
-        type: 'setSelectedDates',
+        type: "setSelectedDates",
         payload: selectedDates.filter(function (date) {
           return !_utils["default"].isSameDay(date, day);
         })
       });
     } else {
       dispatch({
-        type: 'setSelectedDates',
+        type: "setSelectedDates",
         payload: [].concat(_toConsumableArray(selectedDates), [day])
       });
     }
@@ -125,13 +127,13 @@ var DatePicker = function DatePicker(_ref) {
     }
 
     dispatch({
-      type: 'setSelectedDates',
+      type: "setSelectedDates",
       payload: newDates
     });
   }, [selectedDates, dispatch, readOnly]);
   var dismiss = (0, _react.useCallback)(function () {
     dispatch({
-      type: 'setSelectedDates',
+      type: "setSelectedDates",
       payload: []
     });
     onCancel();
@@ -148,7 +150,7 @@ var DatePicker = function DatePicker(_ref) {
   (0, _react.useEffect)(function () {
     if (open) {
       dispatch({
-        type: 'setSelectedDates',
+        type: "setSelectedDates",
         payload: outerSelectedDates != null ? outerSelectedDates : []
       });
     }
@@ -169,7 +171,8 @@ var DatePicker = function DatePicker(_ref) {
     readOnly: readOnly,
     cancelButtonText: cancelButtonText,
     submitButtonText: submitButtonText,
-    selectedDatesTitle: selectedDatesTitle
+    selectedDatesTitle: selectedDatesTitle,
+    hideDateDisplay: hideDateDisplay
   }));
 };
 
