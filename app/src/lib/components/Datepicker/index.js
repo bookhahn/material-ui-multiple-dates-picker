@@ -39,7 +39,8 @@ const DatePicker = ({
   cancelButtonText,
   submitButtonText = "Submit",
   selectedDatesTitle = "Selected Dates",
-  hideDateDisplay = true
+  hideDateDisplay = true,
+  multipleDatesAllowed = true
 }) => {
   if (cancelButtonText == null) {
     cancelButtonText = readOnly ? "Dismiss" : "Cancel";
@@ -57,6 +58,14 @@ const DatePicker = ({
     day => {
       if (readOnly) return;
 
+      if (!multipleDatesAllowed) {
+        dispatch({
+          type: "setSelectedDates",
+          payload: [day]
+        });
+        return;
+      }
+
       if (DateUtilities.dateIn(selectedDates, day)) {
         dispatch({
           type: "setSelectedDates",
@@ -71,7 +80,7 @@ const DatePicker = ({
         });
       }
     },
-    [selectedDates, dispatch, readOnly]
+    [selectedDates, dispatch, readOnly, multipleDatesAllowed]
   );
 
   const onRemoveAtIndex = useCallback(
