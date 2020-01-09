@@ -85,7 +85,9 @@ var DatePicker = function DatePicker(_ref) {
       _ref$selectedDatesTit = _ref.selectedDatesTitle,
       selectedDatesTitle = _ref$selectedDatesTit === void 0 ? "Selected Dates" : _ref$selectedDatesTit,
       _ref$hideDateDisplay = _ref.hideDateDisplay,
-      hideDateDisplay = _ref$hideDateDisplay === void 0 ? true : _ref$hideDateDisplay;
+      hideDateDisplay = _ref$hideDateDisplay === void 0 ? true : _ref$hideDateDisplay,
+      _ref$multipleDatesAll = _ref.multipleDatesAllowed,
+      multipleDatesAllowed = _ref$multipleDatesAll === void 0 ? true : _ref$multipleDatesAll;
 
   if (cancelButtonText == null) {
     cancelButtonText = readOnly ? "Dismiss" : "Cancel";
@@ -103,6 +105,14 @@ var DatePicker = function DatePicker(_ref) {
   var onSelect = (0, _react.useCallback)(function (day) {
     if (readOnly) return;
 
+    if (!multipleDatesAllowed) {
+      dispatch({
+        type: "setSelectedDates",
+        payload: [day]
+      });
+      return;
+    }
+
     if (_utils["default"].dateIn(selectedDates, day)) {
       dispatch({
         type: "setSelectedDates",
@@ -116,7 +126,7 @@ var DatePicker = function DatePicker(_ref) {
         payload: [].concat(_toConsumableArray(selectedDates), [day])
       });
     }
-  }, [selectedDates, dispatch, readOnly]);
+  }, [selectedDates, dispatch, readOnly, multipleDatesAllowed]);
   var onRemoveAtIndex = (0, _react.useCallback)(function (index) {
     if (readOnly) return;
 
